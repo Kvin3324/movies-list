@@ -20,8 +20,8 @@ loop do
     rating = gets.chomp
 
     if movies[title.to_sym].nil?
-      # movies[title.to_sym] = rating.to_i
-      movies.store(title, rating)
+      movies[title.to_sym] = rating.to_i
+      #movies.store(title, rating)
       puts "Your movie, #{title}, is added to your list with the rate of: #{rating.to_i}"
     elsif movies.key?(title.to_sym)
       puts "The movie, #{title}, already exists."
@@ -31,7 +31,7 @@ loop do
     movies.each_key { |movie_title| puts movie_title }
 
   when 'update'
-    puts 'Which movie dou you want update ?'
+    puts 'Which movie do you want update ?'
     movies.each_key { |movie_title| puts movie_title }
 
     title_choice_update = gets.chomp
@@ -39,19 +39,20 @@ loop do
       puts 'Movie not found'
     else
       puts "Which rating do you to attribute to #{title_choice_update} ? (Rate 0 to 5)"
-      rating_choice_update = gets.chomp.to_i
-      movies.store(title_choice_update, rating_choice_update)
+      rating_choice_update = gets.chomp
+      # movies.store(title_choice_update, rating_choice_update)
+      movies[title_choice_update.to_sym] = rating_choice_update.to_i
       puts "#{title_choice_update} has the new rating of #{rating_choice_update}"
     end
 
   when 'display'
-    movies.each_key { |all_title| puts all_title }
+    movies.each { |all_title, all_rating| puts "#{all_title} => #{all_rating}" }
 
   when 'delete'
     puts 'Which movie do you want to delete ?'
     movies.each_key { |all_title| puts all_title }
     title_choice = gets.chomp
-    if movies.key?(title_choice.to_sym)
+    if movies[title_choice.to_sym].nil?
       puts "The movie, #{title_choice.to_sym}, doesn't exists."
     else
       movies.delete(title_choice.to_sym)
