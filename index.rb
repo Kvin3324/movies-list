@@ -5,16 +5,14 @@ movies = {
 
 puts 'Welcome in your movie list'
 
-def actions
-  puts 'What do you want to do ? (Please enter: add, update, display, delete, exit)'
-end
-actions
-choice = gets.chomp
-
 loop do
-  break if choice == 'exit'
+  puts 'What do you want to do ? (Please enter: add, update, display, delete, exit)'
+  choice = gets.chomp
 
   case choice
+  when 'exit'
+    break
+
   when 'add'
     puts 'Which movie do you want to add ?'
     title = gets.chomp
@@ -31,7 +29,6 @@ loop do
       puts 'Enter a good action.'
     end
     movies.each_key { |movie_title| puts movie_title }
-    next
 
   when 'update'
     puts 'Which movie dou you want update ?'
@@ -52,6 +49,7 @@ loop do
 
   when 'delete'
     puts 'Which movie do you want to delete ?'
+    movies.each_key { |all_title| puts all_title }
     title_choice = gets.chomp
     if movies.key?(title_choice.to_sym)
       puts "The movie, #{title_choice.to_sym}, doesn't exists."
@@ -60,5 +58,4 @@ loop do
       puts "#{title_choice.to_sym} has been delete from your list."
     end
   end
-  actions
 end
